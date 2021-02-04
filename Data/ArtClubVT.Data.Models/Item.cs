@@ -1,10 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using ArtClubVT.Data.Common.Models;
-
-namespace ArtClubVT.Data.Models
+﻿namespace ArtClubVT.Data.Models
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Text;
+
+    using ArtClubVT.Data.Common.Models;
+
     public class Item : BaseDeletableModel<int>
     {
         public Item()

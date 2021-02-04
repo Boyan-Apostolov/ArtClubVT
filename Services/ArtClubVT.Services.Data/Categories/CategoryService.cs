@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ArtClubVT.Data.Common.Repositories;
-using ArtClubVT.Data.Models;
-
-namespace ArtClubVT.Services.Data.Categories
+﻿namespace ArtClubVT.Services.Data.Categories
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
+
+    using ArtClubVT.Data.Common.Repositories;
+    using ArtClubVT.Data.Models;
+    using ArtClubVT.Services.Mapping;
+    using ArtClubVT.Web.ViewModels;
+
     public class CategoryService : ICategoryService
     {
         private readonly IDeletableEntityRepository<Category> categoryRepository;
@@ -19,13 +22,13 @@ namespace ArtClubVT.Services.Data.Categories
 
         public async Task AddCategoryToDb(string name)
         {
-            await this.categoryRepository.AddAsync(new Category() {Name = name});
+            await this.categoryRepository.AddAsync(new Category() { Name = name });
             await this.categoryRepository.SaveChangesAsync();
         }
 
-        public ICollection<Category> GetAllCategories()
+        public ICollection<T> GetAllCategories<T>()
         {
-            return this.categoryRepository.All().ToList();
+            return this.categoryRepository.All().To<T>().ToList();
         }
     }
 }

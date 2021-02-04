@@ -1,12 +1,10 @@
-﻿using System.Threading.Tasks;
-using ArtClubVT.Services.Data.Categories;
-
-namespace ArtClubVT.Web.Controllers
+﻿namespace ArtClubVT.Web.Controllers
 {
     using System.Diagnostics;
+    using System.Threading.Tasks;
 
+    using ArtClubVT.Services.Data.Categories;
     using ArtClubVT.Web.ViewModels;
-
     using Microsoft.AspNetCore.Mvc;
 
     public class HomeController : BaseController

@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using ArtClubVT.Services.Data.Categories;
-
-namespace ArtClubVT.Web.Controllers
+﻿namespace ArtClubVT.Web.Controllers
 {
+    using System;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Threading.Tasks;
+
+    using ArtClubVT.Services.Data.Categories;
+    using ArtClubVT.Web.ViewModels;
+    using Microsoft.AspNetCore.Mvc;
+
     public class CategoriesController : Controller
     {
         private readonly ICategoryService categoryService;
@@ -18,7 +20,7 @@ namespace ArtClubVT.Web.Controllers
 
         public IActionResult GetAll()
         {
-            var categories = this.categoryService.GetAllCategories();
+            var categories = this.categoryService.GetAllCategories<CategoryViewModel>();
             return this.View(categories);
         }
 

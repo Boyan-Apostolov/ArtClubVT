@@ -1,7 +1,4 @@
-﻿using ArtClubVT.Services.Data.Categories;
-using ArtClubVT.Services.Data.Items;
-
-namespace ArtClubVT.Web
+﻿namespace ArtClubVT.Web
 {
     using System.Reflection;
 
@@ -12,10 +9,11 @@ namespace ArtClubVT.Web
     using ArtClubVT.Data.Repositories;
     using ArtClubVT.Data.Seeding;
     using ArtClubVT.Services.Data;
+    using ArtClubVT.Services.Data.Categories;
+    using ArtClubVT.Services.Data.Items;
     using ArtClubVT.Services.Mapping;
     using ArtClubVT.Services.Messaging;
     using ArtClubVT.Web.ViewModels;
-
     using Microsoft.AspNetCore.Builder;
     using Microsoft.AspNetCore.Hosting;
     using Microsoft.AspNetCore.Http;

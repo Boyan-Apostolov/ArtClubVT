@@ -1,16 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using System.Threading.Tasks;
-using ArtClubVT.Data.Models;
-
-namespace ArtClubVT.Services.Data.Categories
+﻿namespace ArtClubVT.Services.Data.Categories
 {
+    using System.Collections.Generic;
+    using System.Threading.Tasks;
+
     public interface ICategoryService
     {
         public Task AddCategoryToDb(string name);
 
-        public ICollection<Category> GetAllCategories();
-
+        public ICollection<T> GetAllCategories<T>();
     }
 }
