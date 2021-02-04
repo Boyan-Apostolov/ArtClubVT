@@ -4,14 +4,16 @@ using ArtClubVT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArtClubVT.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210204142842_AddMapTable")]
+    partial class AddMapTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -155,6 +157,9 @@ namespace ArtClubVT.Data.Migrations
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
 
+                    b.Property<int?>("ItemId")
+                        .HasColumnType("int");
+
                     b.Property<DateTime?>("ModifiedOn")
                         .HasColumnType("datetime2");
 
@@ -164,6 +169,8 @@ namespace ArtClubVT.Data.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("IsDeleted");
+
+                    b.HasIndex("ItemId");
 
                     b.ToTable("Categories");
                 });
@@ -390,6 +397,13 @@ namespace ArtClubVT.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("ArtClubVT.Data.Models.Category", b =>
+                {
+                    b.HasOne("ArtClubVT.Data.Models.Item", null)
+                        .WithMany("Categories")
+                        .HasForeignKey("ItemId");
+                });
+
             modelBuilder.Entity("ArtClubVT.Data.Models.CategoryItem", b =>
                 {
                     b.HasOne("ArtClubVT.Data.Models.Category", "Category")
@@ -399,7 +413,7 @@ namespace ArtClubVT.Data.Migrations
                         .IsRequired();
 
                     b.HasOne("ArtClubVT.Data.Models.Item", "Item")
-                        .WithMany("Categories")
+                        .WithMany()
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();

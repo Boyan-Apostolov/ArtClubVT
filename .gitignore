@@ -351,3 +351,11 @@ MigrationBackup/
 
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
+Web/ArtClubVT.Web.Web/appsettings.json
+Web/ArtClubVT.Web.Web/appsettings.json
+
+lib/
+wwwroot/css/site.min.css
+wwwroot/css/sb-admin-2.min.css
+Web/ArtClubVT.Web.Web/appsettings.Development.json
+Web/ArtClubVT.Web/appsettings.Production.json

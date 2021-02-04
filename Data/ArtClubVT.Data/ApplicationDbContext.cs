@@ -24,6 +24,12 @@
         {
         }
 
+        public DbSet<Item> Items { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+
+        public DbSet<CategoryItem> CategoryItems { get; set; }
+
         public DbSet<Setting> Settings { get; set; }
 
         public override int SaveChanges() => this.SaveChanges(true);
