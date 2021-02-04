@@ -8,5 +8,7 @@
         public Task AddCategoryToDb(string name);
 
         public ICollection<T> GetAllCategories<T>();
+
+        public IEnumerable<KeyValuePair<string, string>> GetAllAsKeyValuePairs();
     }
 }

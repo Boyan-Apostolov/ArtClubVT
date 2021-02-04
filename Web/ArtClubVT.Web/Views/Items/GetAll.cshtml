@@ -1,0 +1,19 @@
+﻿@model ICollection<ItemViewModel>
+@{
+    this.ViewData["Title"] = "Продукти";
+}
+
+@foreach (var item in Model)
+{
+    <div>
+        <p>Име: @item.Name</p>
+        <p>Описание: @item.Description</p>
+        <p>Размер: @item.Size</p>
+        <p>Материал: @item.Material</p>
+        <p>Номер на продукта: @item.Id</p>
+        <img src=@item.ImageLink />
+        <p>Цена: @item.Price</p>
+        <p>Количество: @item.Quantity</p>
+    </div>
+    <hr />
+}

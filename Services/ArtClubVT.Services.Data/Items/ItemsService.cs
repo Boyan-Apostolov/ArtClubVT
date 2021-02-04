@@ -4,10 +4,12 @@
     using System.Collections.Generic;
     using System.Linq;
     using System.Text;
+    using System.Threading.Tasks;
 
     using ArtClubVT.Data.Common.Repositories;
     using ArtClubVT.Data.Models;
     using ArtClubVT.Services.Mapping;
+    using ArtClubVT.Web.ViewModels;
     using Microsoft.EntityFrameworkCore;
 
     public class ItemsService : IItemsService
@@ -27,6 +29,33 @@
                     .Any(n => n.Category.Name == categoryName))
                 .To<T>()
                 .ToList();
+        }
+
+        public ICollection<T> GetAll<T>()
+        {
+            return this.itemsRepository.All()
+                .To<T>()
+                .ToList();
+        }
+
+        public async Task AddItemToDb(CreateItemViewModel model)
+        {
+            var item = new Item()
+            {
+                Name = model.Name,
+                Description = model.Description,
+                Size = model.Size,
+                Material = model.Material,
+                ImageLink = "No image yet", // TODO: Work with images
+                Price = model.Price,
+                Quantity = model.Quantity,
+            };
+            await this.itemsRepository.AddAsync(item);
+
+            item.Categories.Add(new CategoryItem()
+            { CategoryId = model.CategoryId, ItemId = item.Id });
+
+            await this.itemsRepository.SaveChangesAsync();
         }
     }
 }

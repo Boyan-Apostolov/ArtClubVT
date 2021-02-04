@@ -21,8 +21,6 @@
 
         public string Material { get; set; }
 
-        public int ProductCode { get; set; }
-
         public string ImageLink { get; set; }
 
         public double Price { get; set; }
