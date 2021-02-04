@@ -36,4 +36,8 @@
     <ProjectReference Include="..\ArtClubVT.Web.Infrastructure\ArtClubVT.Web.Infrastructure.csproj" />
     <ProjectReference Include="..\ArtClubVT.Web.ViewModels\ArtClubVT.Web.ViewModels.csproj" />
   </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Views\Items\" />
+  </ItemGroup>
 </Project>

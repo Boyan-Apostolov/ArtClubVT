@@ -1,4 +1,7 @@
-﻿namespace ArtClubVT.Web
+﻿using ArtClubVT.Services.Data.Categories;
+using ArtClubVT.Services.Data.Items;
+
+namespace ArtClubVT.Web
 {
     using System.Reflection;
 
@@ -65,6 +68,8 @@
             // Application services
             services.AddTransient<IEmailSender, NullMessageSender>();
             services.AddTransient<ISettingsService, SettingsService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IItemsService, ItemsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

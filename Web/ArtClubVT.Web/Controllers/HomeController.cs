@@ -1,4 +1,7 @@
-﻿namespace ArtClubVT.Web.Controllers
+﻿using System.Threading.Tasks;
+using ArtClubVT.Services.Data.Categories;
+
+namespace ArtClubVT.Web.Controllers
 {
     using System.Diagnostics;
 
@@ -17,6 +20,8 @@
         {
             return this.View();
         }
+
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
