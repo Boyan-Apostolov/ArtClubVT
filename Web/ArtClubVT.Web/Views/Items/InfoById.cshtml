@@ -1,0 +1,22 @@
+﻿@model ItemViewModel
+@{
+    this.ViewData["Title"] = Model.Name;
+}
+<div class="row">
+    <div class="col-md-4" style="display: inline">
+        <a href="@Model.ImageLink"><img class="img-fluid img-thumbnail" src="@Model.ImageLink" /></a>
+    </div>
+    <div class="col-md-6" style="display: inline-block">
+        <h1>Продукт: @Model.Name</h1>
+        <p>Описание: @Model.Description</p>
+        <p>Размер: @Model.Size</p>
+        <p>Материал: @Model.Material</p>
+        <p>Оставащи бройки: @Model.Quantity</p>
+    </div>
+    <div class="col-md-2" style="padding-top: 50px">
+        <p>Код на продукт: @Model.Id</p>
+        <p>Цена: @Model.Price</p>
+        <a class="btn btn-success" asp-area="" asp-controller="Items" asp-action="OrderItem" asp-route-id="@Model.Id">ПОРЪЧАЙ</a>
+    </div>
+    <div> </div>
+</div>

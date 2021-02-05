@@ -1,7 +1,7 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-
-namespace ArtClubVT.Data.Migrations
+﻿namespace ArtClubVT.Data.Migrations
 {
+    using Microsoft.EntityFrameworkCore.Migrations;
+
     public partial class RemoveProductCodeFromItem : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

@@ -54,7 +54,19 @@
         public IActionResult GetItemsByCategoryName(string categoryName)
         {
             var items = this.itemsService.GetItemsByCategory<ItemViewModel>(categoryName);
+            this.ViewBag.CategoryName = categoryName;
             return this.View(items);
+        }
+
+        public IActionResult InfoById(int id)
+        {
+            var item = this.itemsService.GetItemById<ItemViewModel>(id);
+            return this.View(item);
+        }
+
+        public IActionResult OrderItem(int id)
+        {
+            return this.Ok(); // TODO: Implement
         }
     }
 }

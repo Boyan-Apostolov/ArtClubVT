@@ -1,19 +1,19 @@
 ﻿@model ICollection<ItemViewModel>
 @{
-    this.ViewData["Title"] = "Продукти";
+    this.ViewData["Title"] = $"Продукти от категория \"{this.ViewBag.CategoryName}\"";
+    ;
 }
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+<div class="row">
+    @foreach (var item in this.Model)
+    {
+        <div class="media col-md-3" style="display: block">
+            <img class="img-fluid  img-thumbnail" style="width: 400px; height: auto" src="@item.ImageLink" alt="">
 
-@foreach (var item in Model)
-{
-    <div>
-        <p>Име: @item.Name</p>
-        <p>Описание: @item.Description</p>
-        <p>Размер: @item.Size</p>
-        <p>Материал: @item.Material</p>
-        <p>Номер на продукта: @item.Id</p>
-        <img src=@item.ImageLink />
-        <p>Цена: @item.Price</p>
-        <p>Количество: @item.Quantity</p>
-    </div>
-    <hr />
-}
+            <div class="media-body justify-content-center text-center ">
+                <h5 class="mt-0">@item.Name</h5>
+                <a class="btn btn-success btn-outline-warning text-white" asp-area="" asp-controller="Items" asp-action="InfoById" asp-route-id="@item.Id">Детайли</a><br />
+            </div>
+        </div>
+    }
+</div>

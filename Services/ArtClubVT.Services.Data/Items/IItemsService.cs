@@ -7,6 +7,7 @@
 
     using ArtClubVT.Data.Models;
     using ArtClubVT.Web.ViewModels;
+    using Microsoft.AspNetCore.Http;
 
     public interface IItemsService
     {
@@ -15,5 +16,9 @@
         public ICollection<T> GetAll<T>();
 
         public Task AddItemToDb(CreateItemViewModel model);
+
+        public Task<string> UploadItemPicture(IFormFile file);
+
+        public T GetItemById<T>(int id);
     }
 }
