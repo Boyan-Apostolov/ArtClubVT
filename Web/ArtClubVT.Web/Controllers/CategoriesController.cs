@@ -5,8 +5,10 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using ArtClubVT.Common;
     using ArtClubVT.Services.Data.Categories;
     using ArtClubVT.Web.ViewModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
 
     public class CategoriesController : Controller
@@ -24,12 +26,14 @@
             return this.View(categories);
         }
 
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult AddCategory()
         {
             return this.View();
         }
 
         [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> AddCategory(string name)
         {
             await this.categoryService.AddCategoryToDb(name);

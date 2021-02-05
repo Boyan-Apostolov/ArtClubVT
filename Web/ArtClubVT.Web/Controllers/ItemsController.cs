@@ -5,9 +5,11 @@
     using System.Linq;
     using System.Threading.Tasks;
 
+    using ArtClubVT.Common;
     using ArtClubVT.Services.Data.Categories;
     using ArtClubVT.Services.Data.Items;
     using ArtClubVT.Web.ViewModels;
+    using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
     using Microsoft.CodeAnalysis.CSharp.Syntax;
 
@@ -30,6 +32,7 @@
             return this.View(items);
         }
 
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public IActionResult AddItem()
         {
             var viewModel = new CreateItemViewModel();
@@ -38,6 +41,7 @@
         }
 
         [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> AddItem(CreateItemViewModel model)
         {
             if (!this.ModelState.IsValid)
@@ -62,11 +66,6 @@
         {
             var item = this.itemsService.GetItemById<ItemViewModel>(id);
             return this.View(item);
-        }
-
-        public IActionResult OrderItem(int id)
-        {
-            return this.Ok(); // TODO: Implement
         }
     }
 }

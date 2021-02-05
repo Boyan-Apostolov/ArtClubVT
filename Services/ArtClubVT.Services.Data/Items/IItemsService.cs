@@ -20,5 +20,7 @@
         public Task<string> UploadItemPicture(IFormFile file);
 
         public T GetItemById<T>(int id);
+
+        public Item GetItemById(int id);
     }
 }

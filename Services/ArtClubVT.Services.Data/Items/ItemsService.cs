@@ -100,5 +100,10 @@
         {
             return this.itemsRepository.All().Where(x => x.Id == id).To<T>().FirstOrDefault();
         }
+
+        public Item GetItemById(int id)
+        {
+            return this.itemsRepository.All().FirstOrDefault(x => x.Id == id);
+        }
     }
 }
