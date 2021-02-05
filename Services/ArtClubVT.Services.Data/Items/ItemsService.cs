@@ -30,9 +30,7 @@
         public ICollection<T> GetItemsByCategory<T>(string categoryName)
         {
             return this.itemsRepository.All()
-                .Include(x => x.Categories)
-                .Where(x => x.Categories
-                    .Any(n => n.Category.Name == categoryName))
+                .Where(x => x.Category.Name == categoryName)
                 .To<T>()
                 .ToList();
         }
@@ -57,11 +55,9 @@
                 ImageLink = imageUrl,
                 Price = model.Price,
                 Quantity = model.Quantity,
+                CategoryId = model.CategoryId,
             };
             await this.itemsRepository.AddAsync(item);
-
-            item.Categories.Add(new CategoryItem()
-            { CategoryId = model.CategoryId, ItemId = item.Id });
 
             await this.itemsRepository.SaveChangesAsync();
         }

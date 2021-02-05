@@ -8,11 +8,6 @@
 
     public class Item : BaseDeletableModel<int>
     {
-        public Item()
-        {
-            this.Categories = new HashSet<CategoryItem>();
-        }
-
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -27,6 +22,8 @@
 
         public int Quantity { get; set; }
 
-        public ICollection<CategoryItem> Categories { get; set; }
+        public Category Category { get; set; }
+
+        public int CategoryId { get; set; }
     }
 }

@@ -11,11 +11,11 @@
     {
         public Category()
         {
-            this.Items = new HashSet<CategoryItem>();
+            this.Items = new HashSet<Item>();
         }
 
         public string Name { get; set; }
 
-        public ICollection<CategoryItem> Items { get; set; }
+        public ICollection<Item> Items { get; set; }
     }
 }
