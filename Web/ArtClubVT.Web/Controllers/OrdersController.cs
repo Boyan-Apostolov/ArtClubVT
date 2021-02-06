@@ -1,8 +1,5 @@
 ﻿namespace ArtClubVT.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -31,13 +28,18 @@
         [HttpPost]
         public async Task<IActionResult> OrderItem(AddOrderViewModel model)
         {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(model);
+            }
+
             model.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var orderId = await this.ordersService.CreateOrder(model);
-            return this.RedirectToAction(nameof(this.SuccessfullOrder), new {orderId});
+            var orderId = await this.ordersService.CreateOrderAsync(model);
+            return this.RedirectToAction(nameof(this.SuccessfulOrder), new { orderId });
         }
 
         [Authorize]
-        public IActionResult SuccessfullOrder(int orderId)
+        public IActionResult SuccessfulOrder(int orderId)
         {
             this.ViewBag.OrderId = orderId;
             return this.View();

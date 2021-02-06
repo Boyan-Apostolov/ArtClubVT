@@ -5,7 +5,7 @@
 
     public interface ICategoryService
     {
-        public Task AddCategoryToDb(string name);
+        public Task AddCategoryToDbAsync(string name);
 
         public ICollection<T> GetAllCategories<T>();
 

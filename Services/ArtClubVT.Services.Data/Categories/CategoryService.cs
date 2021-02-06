@@ -20,7 +20,7 @@
             this.categoryRepository = categoryRepository;
         }
 
-        public async Task AddCategoryToDb(string name)
+        public async Task AddCategoryToDbAsync(string name)
         {
             await this.categoryRepository.AddAsync(new Category() { Name = name });
             await this.categoryRepository.SaveChangesAsync();

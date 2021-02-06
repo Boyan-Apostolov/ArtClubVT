@@ -30,7 +30,7 @@
         public ICollection<T> GetItemsByCategory<T>(string categoryName)
         {
             return this.itemsRepository.All()
-                .Where(x => x.Category.Name == categoryName)
+                .Where(x => x.Category.Name == categoryName && x.Quantity >= 1)
                 .To<T>()
                 .ToList();
         }
@@ -38,13 +38,14 @@
         public ICollection<T> GetAll<T>()
         {
             return this.itemsRepository.All()
+                .Where(x => x.Quantity >= 1)
                 .To<T>()
                 .ToList();
         }
 
-        public async Task AddItemToDb(CreateItemViewModel model)
+        public async Task AddItemToDbAsync(CreateItemViewModel model)
         {
-            var imageUrl = await this.UploadItemPicture(model.Image);
+            var imageUrl = await this.UploadItemPictureAsync(model.Image);
 
             var item = new Item()
             {
@@ -62,7 +63,7 @@
             await this.itemsRepository.SaveChangesAsync();
         }
 
-        public async Task<string> UploadItemPicture(IFormFile file)
+        public async Task<string> UploadItemPictureAsync(IFormFile file)
         {
             var cloudinaryAccount = this.configuration.GetSection("Cloudinary");
             Account account = new Account(
@@ -104,6 +105,28 @@
         public Item GetItemById(int id)
         {
             return this.itemsRepository.All().FirstOrDefault(x => x.Id == id);
+        }
+
+        public async Task EditItemAsync(int id, EditItemViewModel model)
+        {
+            var item = this.GetItemById(id);
+
+            item.Name = model.Name;
+            item.Description = model.Description;
+            item.Price = model.Price;
+            item.CategoryId = model.CategoryId;
+            item.Material = model.Material;
+            item.Quantity = model.Quantity;
+            item.Size = model.Size;
+
+            await this.itemsRepository.SaveChangesAsync();
+        }
+
+        public async Task DeleteItemAsync(int id)
+        {
+            var item = await this.itemsRepository.All().FirstOrDefaultAsync(x => x.Id == id);
+            this.itemsRepository.Delete(item);
+            await this.itemsRepository.SaveChangesAsync();
         }
     }
 }

@@ -9,8 +9,10 @@
     using ArtClubVT.Services.Mapping;
     using Microsoft.AspNetCore.Http;
 
-    public class CreateItemViewModel : IMapFrom<Item>
+    public class EditItemViewModel : IMapFrom<Item>
     {
+        public int Id { get; set; }
+
         [Required]
         [MinLength(5)]
         [MaxLength(100)]
@@ -35,9 +37,6 @@
         public int Quantity { get; set; }
 
         public int CategoryId { get; set; }
-
-        [Required]
-        public IFormFile Image { get; set; }
 
         public IEnumerable<KeyValuePair<string, string>> Categories { get; set; }
     }

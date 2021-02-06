@@ -15,12 +15,16 @@
 
         public ICollection<T> GetAll<T>();
 
-        public Task AddItemToDb(CreateItemViewModel model);
+        public Task AddItemToDbAsync(CreateItemViewModel model);
 
-        public Task<string> UploadItemPicture(IFormFile file);
+        public Task<string> UploadItemPictureAsync(IFormFile file);
 
         public T GetItemById<T>(int id);
 
         public Item GetItemById(int id);
+
+        public Task EditItemAsync(int id, EditItemViewModel model);
+
+        public Task DeleteItemAsync(int id);
     }
 }

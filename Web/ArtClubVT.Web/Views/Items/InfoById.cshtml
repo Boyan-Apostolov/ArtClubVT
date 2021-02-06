@@ -1,4 +1,5 @@
-﻿@model ItemViewModel
+﻿@using ArtClubVT.Common
+@model ItemViewModel
 @{
     this.ViewData["Title"] = Model.Name;
 }
@@ -17,6 +18,28 @@
         <p>Код на продукт: @Model.Id</p>
         <p>Цена: @Model.Price</p>
         <a class="btn btn-success" asp-area="" asp-controller="Orders" asp-action="OrderItem" asp-route-id="@Model.Id">ПОРЪЧАЙ</a>
+        @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
+        {
+            <a class="btn btn-warning" style="margin-top: 10px" asp-area="" asp-controller="Items" asp-action="EditItem" asp-route-id="@Model.Id">Редактирай</a>
+            <form method="post" asp-controller="Items" asp-action="DeleteItem" id="deleteForm" name="deleteForm" asp-route-id=@Model.Id>
+            </form>
+            <button class="btn btn-danger" style="margin-top: 10px" data-toggle="modal" data-target="#deleteModal">Изтриване</button>
+        }
     </div>
     <div> </div>
+</div>
+
+<div class="modal" tabindex="-1" role="dialog" id="deleteModal">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-body">
+                <h4>Сигурни ли сте, че искате да изтриете този продукт?</h4>
+                <p>След това няма да може да го възстановите!</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" onclick="document.getElementById('deleteForm').submit();">Изтриване</button>
+                <button type="button" class="btn btn-success" data-dismiss="modal">Назад</button>
+            </div>
+        </div>
+    </div>
 </div>

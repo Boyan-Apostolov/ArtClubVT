@@ -9,6 +9,6 @@
 
     public interface IOrdersService
     {
-        Task<int> CreateOrder(AddOrderViewModel model);
+        Task<int> CreateOrderAsync(AddOrderViewModel model);
     }
 }

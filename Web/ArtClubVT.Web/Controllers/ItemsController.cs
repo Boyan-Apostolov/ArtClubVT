@@ -50,7 +50,7 @@
                 return this.View(model);
             }
 
-            await this.itemsService.AddItemToDb(model);
+            await this.itemsService.AddItemToDbAsync(model);
 
             return this.RedirectToAction(nameof(this.GetAll));
         }
@@ -66,6 +66,36 @@
         {
             var item = this.itemsService.GetItemById<ItemViewModel>(id);
             return this.View(item);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public IActionResult EditItem(int id)
+        {
+            var viewModel = this.itemsService.GetItemById<EditItemViewModel>(id);
+            viewModel.Categories = this.categoryService.GetAllAsKeyValuePairs();
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> EditItem(int id, EditItemViewModel input)
+        {
+            if (!this.ModelState.IsValid)
+            {
+                return this.View(input);
+            }
+
+            await this.itemsService.EditItemAsync(id, input);
+
+            return this.RedirectToAction(nameof(this.InfoById), new { id });
+        }
+
+        [HttpPost]
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> DeleteItem(int id)
+        {
+            await this.itemsService.DeleteItemAsync(id);
+            return this.RedirectToAction(nameof(this.GetAll));
         }
     }
 }

@@ -36,7 +36,7 @@
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> AddCategory(string name)
         {
-            await this.categoryService.AddCategoryToDb(name);
+            await this.categoryService.AddCategoryToDbAsync(name);
             return this.RedirectToAction(nameof(this.GetAll));
         }
     }

@@ -1,6 +1,4 @@
-﻿using ArtClubVT.Services.Data.Items;
-
-namespace ArtClubVT.Services.Data.Orders
+﻿namespace ArtClubVT.Services.Data.Orders
 {
     using System;
     using System.Collections.Generic;
@@ -9,6 +7,7 @@ namespace ArtClubVT.Services.Data.Orders
 
     using ArtClubVT.Data.Common.Repositories;
     using ArtClubVT.Data.Models;
+    using ArtClubVT.Services.Data.Items;
     using ArtClubVT.Web.ViewModels;
 
     public class OrdersService : IOrdersService
@@ -22,7 +21,7 @@ namespace ArtClubVT.Services.Data.Orders
             this.itemsService = itemsService;
         }
 
-        public async Task<int> CreateOrder(AddOrderViewModel model)
+        public async Task<int> CreateOrderAsync(AddOrderViewModel model)
         {
             var order = new Order()
             {
@@ -33,6 +32,8 @@ namespace ArtClubVT.Services.Data.Orders
                 BuyerPhone = model.BuyerPhone,
                 Note = model.Note == null ? model.Note : "няма",
             };
+
+            // TODO; lower quantity + -sold-out-
             await this.ordersRepository.AddAsync(order);
             await this.ordersRepository.SaveChangesAsync();
             return order.Id;
