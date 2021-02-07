@@ -8,6 +8,10 @@
 
     public class Item : BaseDeletableModel<int>
     {
+        public Item()
+        {
+            this.Users = new List<ItemsUsers>();
+        }
         public string Name { get; set; }
 
         public string Description { get; set; }
@@ -25,5 +29,7 @@
         public Category Category { get; set; }
 
         public int CategoryId { get; set; }
+
+        public ICollection<ItemsUsers> Users { get; set; }
     }
 }

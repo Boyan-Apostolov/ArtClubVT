@@ -29,8 +29,14 @@ namespace ArtClubVT.Web.Controllers
         public async Task<IActionResult> AddItemToUserCart(int itemId)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            await this.cartsService.AddItemToCartAsync(itemId, userId);
-            return this.RedirectToAction(nameof(GetUsersCart));
+            var itemsCount = await this.cartsService.AddItemToCartAsync(itemId, userId);
+            return this.RedirectToAction(nameof(this.SuccessfullyAdded), new { itemsCount });
+        }
+
+        public IActionResult SuccessfullyAdded(int itemsCount)
+        {
+            this.ViewBag.Count = itemsCount;
+            return this.View();
         }
     }
 }

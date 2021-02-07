@@ -1,4 +1,6 @@
-﻿namespace ArtClubVT.Data.Models
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace ArtClubVT.Data.Models
 {
     using System;
     using System.Collections.Generic;
@@ -10,9 +12,10 @@
     {
         public Cart()
         {
-            this.Items = new HashSet<Item>();
+            this.Items = new List<Item>();
         }
 
+        [ForeignKey(nameof(ApplicationUser))]
         public string ApplicationUserId { get; set; }
 
         public ApplicationUser ApplicationUser { get; set; }

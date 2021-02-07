@@ -4,14 +4,16 @@ using ArtClubVT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArtClubVT.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210207195103_LinkCartsTousers")]
+    partial class LinkCartsTousers
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -163,7 +165,9 @@ namespace ArtClubVT.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
+                    b.HasIndex("ApplicationUserId")
+                        .IsUnique()
+                        .HasFilter("[ApplicationUserId] IS NOT NULL");
 
                     b.HasIndex("IsDeleted");
 
@@ -254,45 +258,6 @@ namespace ArtClubVT.Data.Migrations
                     b.HasIndex("IsDeleted");
 
                     b.ToTable("Items");
-                });
-
-            modelBuilder.Entity("ArtClubVT.Data.Models.ItemsUsers", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<DateTime>("CreatedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("DeletedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("ItemId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("ModifiedOn")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("Quantity")
-                        .HasColumnType("int");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("ApplicationUserId");
-
-                    b.HasIndex("IsDeleted");
-
-                    b.HasIndex("ItemId");
-
-                    b.ToTable("ItemsUsers");
                 });
 
             modelBuilder.Entity("ArtClubVT.Data.Models.Order", b =>
@@ -482,8 +447,8 @@ namespace ArtClubVT.Data.Migrations
             modelBuilder.Entity("ArtClubVT.Data.Models.Cart", b =>
                 {
                     b.HasOne("ArtClubVT.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                        .WithOne("Cart")
+                        .HasForeignKey("ArtClubVT.Data.Models.Cart", "ApplicationUserId");
 
                     b.Navigation("ApplicationUser");
                 });
@@ -501,23 +466,6 @@ namespace ArtClubVT.Data.Migrations
                         .IsRequired();
 
                     b.Navigation("Category");
-                });
-
-            modelBuilder.Entity("ArtClubVT.Data.Models.ItemsUsers", b =>
-                {
-                    b.HasOne("ArtClubVT.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany("Items")
-                        .HasForeignKey("ApplicationUserId");
-
-                    b.HasOne("ArtClubVT.Data.Models.Item", "Item")
-                        .WithMany("Users")
-                        .HasForeignKey("ItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("ApplicationUser");
-
-                    b.Navigation("Item");
                 });
 
             modelBuilder.Entity("ArtClubVT.Data.Models.Order", b =>
@@ -590,9 +538,9 @@ namespace ArtClubVT.Data.Migrations
 
             modelBuilder.Entity("ArtClubVT.Data.Models.ApplicationUser", b =>
                 {
-                    b.Navigation("Claims");
+                    b.Navigation("Cart");
 
-                    b.Navigation("Items");
+                    b.Navigation("Claims");
 
                     b.Navigation("Logins");
 
@@ -607,11 +555,6 @@ namespace ArtClubVT.Data.Migrations
             modelBuilder.Entity("ArtClubVT.Data.Models.Category", b =>
                 {
                     b.Navigation("Items");
-                });
-
-            modelBuilder.Entity("ArtClubVT.Data.Models.Item", b =>
-                {
-                    b.Navigation("Users");
                 });
 #pragma warning restore 612, 618
         }

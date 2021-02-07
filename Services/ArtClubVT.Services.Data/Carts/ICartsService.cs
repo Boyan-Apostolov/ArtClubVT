@@ -11,7 +11,7 @@
     {
         public ICollection<T> GetUsersCart<T>(string userId);
 
-        public Task AddItemToCartAsync(int itemId, string userId);
+        public Task<int> AddItemToCartAsync(int itemId, string userId);
 
         public Cart GetCartByUserId(string userId);
 
