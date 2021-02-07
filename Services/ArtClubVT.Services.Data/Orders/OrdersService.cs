@@ -23,9 +23,10 @@
 
         public async Task<int> CreateOrderAsync(AddOrderViewModel model)
         {
+            var item = this.itemsService.GetItemById(model.ItemId);
             var order = new Order()
             {
-                Item = this.itemsService.GetItemById(model.ItemId),
+                Item = item,
                 ApplicationUserId = model.UserId,
                 BuyerName = model.BuyerName,
                 BuyerAddress = model.BuyerAddress,
@@ -33,7 +34,7 @@
                 Note = model.Note == null ? model.Note : "няма",
             };
 
-            // TODO; lower quantity + -sold-out-
+            item.Quantity--;
             await this.ordersRepository.AddAsync(order);
             await this.ordersRepository.SaveChangesAsync();
             return order.Id;

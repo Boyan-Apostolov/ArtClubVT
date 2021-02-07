@@ -7,6 +7,8 @@
     <title>@this.ViewData["Title"] - @GlobalConstants.SystemName</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+
+    <script src="https://kit.fontawesome.com/29d40954af.js" crossorigin="anonymous"></script>
 </head>
 <body>
     <header>
@@ -30,13 +32,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="GetAll">Категории</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Categories" asp-action="AddCategory">Добави категория</a>
-                        </li>
-                        <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="GetAll">Продукти</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Items" asp-action="AddItem">Добавяне на продукт</a>
                         </li>
                     </ul>
                 </div>

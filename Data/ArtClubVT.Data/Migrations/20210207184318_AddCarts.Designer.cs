@@ -4,14 +4,16 @@ using ArtClubVT.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace ArtClubVT.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20210207184318_AddCarts")]
+    partial class AddCarts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -66,6 +68,9 @@ namespace ArtClubVT.Data.Migrations
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("AccessFailedCount")
+                        .HasColumnType("int");
+
+                    b.Property<int>("CartId")
                         .HasColumnType("int");
 
                     b.Property<string>("ConcurrencyStamp")
@@ -126,6 +131,9 @@ namespace ArtClubVT.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CartId")
+                        .IsUnique();
+
                     b.HasIndex("IsDeleted");
 
                     b.HasIndex("NormalizedEmail")
@@ -147,7 +155,7 @@ namespace ArtClubVT.Data.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("ApplicationUserId")
-                        .HasColumnType("nvarchar(450)");
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<DateTime>("CreatedOn")
                         .HasColumnType("datetime2");
@@ -163,11 +171,9 @@ namespace ArtClubVT.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ApplicationUserId");
-
                     b.HasIndex("IsDeleted");
 
-                    b.ToTable("Carts");
+                    b.ToTable("Cart");
                 });
 
             modelBuilder.Entity("ArtClubVT.Data.Models.Category", b =>
@@ -440,13 +446,15 @@ namespace ArtClubVT.Data.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
-            modelBuilder.Entity("ArtClubVT.Data.Models.Cart", b =>
+            modelBuilder.Entity("ArtClubVT.Data.Models.ApplicationUser", b =>
                 {
-                    b.HasOne("ArtClubVT.Data.Models.ApplicationUser", "ApplicationUser")
-                        .WithMany()
-                        .HasForeignKey("ApplicationUserId");
+                    b.HasOne("ArtClubVT.Data.Models.Cart", "Cart")
+                        .WithOne("ApplicationUser")
+                        .HasForeignKey("ArtClubVT.Data.Models.ApplicationUser", "CartId")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("ApplicationUser");
+                    b.Navigation("Cart");
                 });
 
             modelBuilder.Entity("ArtClubVT.Data.Models.Item", b =>
@@ -543,6 +551,8 @@ namespace ArtClubVT.Data.Migrations
 
             modelBuilder.Entity("ArtClubVT.Data.Models.Cart", b =>
                 {
+                    b.Navigation("ApplicationUser");
+
                     b.Navigation("Items");
                 });
 

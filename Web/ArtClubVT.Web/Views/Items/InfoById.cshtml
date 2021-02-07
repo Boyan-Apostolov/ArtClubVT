@@ -17,6 +17,7 @@
     <div class="col-md-2" style="padding-top: 50px">
         <p>Код на продукт: @Model.Id</p>
         <p>Цена: @Model.Price</p>
+        <a class="btn btn-info" asp-area="" asp-controller="Carts" asp-action="AddItemToUserCart" asp-route-itemId="@Model.Id" style="margin-bottom: 10px">Добави в количката</a>
         <a class="btn btn-success" asp-area="" asp-controller="Orders" asp-action="OrderItem" asp-route-id="@Model.Id">ПОРЪЧАЙ</a>
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
