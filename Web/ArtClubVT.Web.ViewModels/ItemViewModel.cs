@@ -6,8 +6,9 @@
 
     using ArtClubVT.Data.Models;
     using ArtClubVT.Services.Mapping;
+    using AutoMapper;
 
-    public class ItemViewModel : IMapFrom<Item>
+    public class ItemViewModel : IMapFrom<Item>, IHaveCustomMappings
     {
         public int Id { get; set; }
 
@@ -24,5 +25,13 @@
         public double Price { get; set; }
 
         public int Quantity { get; set; }
+
+        public void CreateMappings(IProfileExpression configuration)
+        {
+            configuration.CreateMap<ItemViewModel, ItemsUsers>()
+                .ForMember(
+                    x => x.Quantity,
+                    c => c.MapFrom(e => e.Quantity));
+        }
     }
 }

@@ -1,0 +1,31 @@
+﻿@model ICollection<ArtClubVT.Data.Models.ItemsUsers>
+@{
+    this.ViewData["Title"] = "Моята количка";
+    double sum = 0;
+}
+@if (Model.Any())
+{
+    <h1 class="text-center">@this.ViewData["Title"]</h1>
+    @foreach (var itemUser in @Model)
+    {
+        <div class="media">
+            <img class="mr-3 img-fluid" src="@itemUser.Item.ImageLink" style="width: 200px; height: auto" alt="@itemUser.Item.Name">
+            <div class="media-body" style="padding-top: 50px">
+                <h5 class="mt-0">@itemUser.Item.Name</h5>
+                Цена: @itemUser.Item.Price лв.
+                @{ sum += (itemUser.Item.Price * itemUser.Quantity); }
+                <br />
+                Количество: @itemUser.Quantity бр.
+                <br />
+                <a class="btn btn-danger" asp-area="" asp-controller="Items" asp-action="RemoveItemFromUserItems" asp-route-id="@itemUser.ItemId" style="margin-top: 10px">Премахни от количката <i class="fas fa-trash-alt" style="display: inline-block"></i></a>
+            </div>
+        </div>
+        <hr />
+    }
+    <h2 class="text-center">Обща сума: @sum</h2>
+    <a class="text-center" href="#">Продължи</a>
+}
+else
+{
+    <h1 class="text-center">Вашата количка е празна!</h1>
+}

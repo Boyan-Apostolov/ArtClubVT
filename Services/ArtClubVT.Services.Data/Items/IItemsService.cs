@@ -27,8 +27,10 @@
 
         public Task DeleteItemAsync(int id);
 
-        public ICollection<T> GetUsersItems<T>(string userId);
+        public ICollection<ItemsUsers> GetUsersItems(string userId);
 
         Task AddItemToUserAsync(int itemId, string userId, int quantity = 1);
+
+        Task RemoveItemFromUserItems(int id, string userId);
     }
 }

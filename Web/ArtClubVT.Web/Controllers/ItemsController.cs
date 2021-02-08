@@ -94,14 +94,10 @@
         public IActionResult GetUserItems()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
-            var viewModel = new ItemsViewModel()
-            {
-                Items = this.itemsService.GetUsersItems<ItemViewModel>(userId),
-            };
 
-            // var viewModel = this.itemsService.GetUsersItems<>(userId);
-            // var viewModel = this.itemsService.GetUsersItems<UserItemsViewModel>(userId); // TODO: Create UserItemsViewModel
-            return this.Ok("You are in GetUserItems");
+            var viewModel = this.itemsService.GetUsersItems(userId);
+
+            return this.View(viewModel);
         }
 
         [HttpPost]
@@ -116,6 +112,13 @@
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             await this.itemsService.AddItemToUserAsync(itemId, userId, quantity);
+            return this.RedirectToAction(nameof(this.GetUserItems));
+        }
+
+        public async Task<IActionResult> RemoveItemFromUserItems(int id)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await this.itemsService.RemoveItemFromUserItems(id, userId);
             return this.RedirectToAction(nameof(this.GetUserItems));
         }
     }

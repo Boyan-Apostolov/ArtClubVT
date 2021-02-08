@@ -137,27 +137,45 @@
             await this.itemsRepository.SaveChangesAsync();
         }
 
-        public ICollection<T> GetUsersItems<T>(string userId)
+        public ICollection<ItemsUsers> GetUsersItems(string userId)
         {
-            var items = this.itemsUsersRepository.All()
-                .Where(x => x.ApplicationUserId == userId).ToList();
             return this.itemsUsersRepository.All()
+                .Include(x => x.Item)
                 .Where(x => x.ApplicationUserId == userId)
-                .Select(x => x.Item)
-                .To<T>().ToList();
+                .ToList();
+
+            // .To<>() // TODO: user viewModel
         }
 
         public async Task AddItemToUserAsync(int itemId, string userId, int quantity = 1)
         {
             var user = this.usersRepository.All()
                 .FirstOrDefault(x => x.Id == userId);
-            user.Items.Add(new ItemsUsers()
+
+            var item = this.itemsRepository.All().FirstOrDefault(x => x.Id == itemId);
+            if (item.Quantity >= quantity)
             {
-                ApplicationUserId = userId,
-                ApplicationUser = user,
-                ItemId = itemId,
-                Quantity = quantity,
-            });
+                user.Items.Add(new ItemsUsers()
+                {
+                    ApplicationUserId = userId,
+                    ApplicationUser = user,
+                    ItemId = itemId,
+                    Item = item,
+                    Quantity = quantity,
+                });
+                await this.usersRepository.SaveChangesAsync();
+            }
+        }
+
+        public async Task RemoveItemFromUserItems(int id, string userId)
+        {
+            var user = this.usersRepository.All()
+                .Include(x => x.Items)
+                .FirstOrDefault(x => x.Id == userId);
+
+            var userItem = user.Items.FirstOrDefault(x => x.ItemId == id);
+            user.Items.Remove(userItem);
+
             await this.usersRepository.SaveChangesAsync();
         }
     }
