@@ -3,31 +3,55 @@
 @{
     this.ViewData["Title"] = Model.Name;
 }
+<style>
+    div {
+        display: table;
+    }
+
+        div.t {
+            display: table-cell;
+            width: 100%;
+        }
+
+            div.t > input {
+                width: 100%;
+            }
+</style>
 <div class="row">
     <div class="col-md-4" style="display: inline">
         <a href="@Model.ImageLink"><img class="img-fluid img-thumbnail" src="@Model.ImageLink" /></a>
     </div>
-    <div class="col-md-6" style="display: inline-block">
+    <div class="col-md-4" style="display: inline-block">
         <h1>Продукт: @Model.Name</h1>
         <p>Описание: @Model.Description</p>
         <p>Размер: @Model.Size</p>
         <p>Материал: @Model.Material</p>
         <p>Оставащи бройки: @Model.Quantity</p>
     </div>
-    <div class="col-md-2" style="padding-top: 50px">
+    <div class="col-md-3" style="padding-top: 50px">
         <p>Код на продукт: @Model.Id</p>
         <p>Цена: @Model.Price</p>
-        <a class="btn btn-info" asp-area="" asp-controller="Carts" asp-action="AddItemToUserCart" asp-route-itemId="@Model.Id" style="margin-bottom: 10px">Добави в количката</a>
-        <a class="btn btn-success" asp-area="" asp-controller="Orders" asp-action="OrderItem" asp-route-id="@Model.Id">ПОРЪЧАЙ</a>
+        <form method="post" asp-controller="Items" asp-action="AddItemToUserCart">
+            <div  style="width: 300px;">
+                <div class="t">
+                    <input type="number" placeholder="Количество" name="quantity" id="quantity" class="form-control" style="display: inline; height: 60px;"/>
+                    <input type="hidden" name="itemId" id="itemId" value="@Model.Id"/>
+                </div>
+                <button type="submit" class="btn btn-info" style="margin-bottom: 4px">Добави в количката</button>
+            </div>
+        </form>
+        <a class="btn btn-success" style="display: block; margin-top: 10px;" asp-area="" asp-controller="Orders" asp-action="OrderItem" asp-route-id="@Model.Id">ПОРЪЧАЙ</a>
         @if (this.User.IsInRole(GlobalConstants.AdministratorRoleName))
         {
-            <a class="btn btn-warning" style="margin-top: 10px" asp-area="" asp-controller="Items" asp-action="EditItem" asp-route-id="@Model.Id">Редактирай</a>
-            <form method="post" asp-controller="Items" asp-action="DeleteItem" id="deleteForm" name="deleteForm" asp-route-id=@Model.Id>
-            </form>
-            <button class="btn btn-danger" style="margin-top: 10px" data-toggle="modal" data-target="#deleteModal">Изтриване</button>
+            <div style="display: block">
+                <a class="btn btn-warning" style="margin-top: 10px; display: block" asp-area="" asp-controller="Items" asp-action="EditItem" asp-route-id="@Model.Id"><i class="fas fa-edit"></i></a>
+                <form method="post" asp-controller="Items" asp-action="DeleteItem" id="deleteForm" name="deleteForm" asp-route-id=@Model.Id>
+                </form>
+                <a class="btn btn-danger" style="margin-top: 10px; display: block" data-toggle="modal" data-target="#deleteModal"><i class="fas fa-trash-alt" style="display: inline-block"></i></a>
+            </div>
+
         }
     </div>
-    <div> </div>
 </div>
 
 <div class="modal" tabindex="-1" role="dialog" id="deleteModal">

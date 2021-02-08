@@ -9,7 +9,6 @@
     using ArtClubVT.Data.Repositories;
     using ArtClubVT.Data.Seeding;
     using ArtClubVT.Services.Data;
-    using ArtClubVT.Services.Data.Carts;
     using ArtClubVT.Services.Data.Categories;
     using ArtClubVT.Services.Data.Items;
     using ArtClubVT.Services.Data.Orders;
@@ -71,7 +70,6 @@
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IItemsService, ItemsService>();
             services.AddTransient<IOrdersService, OrdersService>();
-            services.AddTransient<ICartsService, CartsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -3,6 +3,7 @@
     using System;
     using System.Collections.Generic;
     using System.Linq;
+    using System.Security.Claims;
     using System.Threading.Tasks;
 
     using ArtClubVT.Common;
@@ -90,12 +91,32 @@
             return this.RedirectToAction(nameof(this.InfoById), new { id });
         }
 
+        public IActionResult GetUserItems()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var viewModel = new ItemsViewModel()
+            {
+                Items = this.itemsService.GetUsersItems<ItemViewModel>(userId),
+            };
+
+            // var viewModel = this.itemsService.GetUsersItems<>(userId);
+            // var viewModel = this.itemsService.GetUsersItems<UserItemsViewModel>(userId); // TODO: Create UserItemsViewModel
+            return this.Ok("You are in GetUserItems");
+        }
+
         [HttpPost]
         [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
         public async Task<IActionResult> DeleteItem(int id)
         {
             await this.itemsService.DeleteItemAsync(id);
             return this.RedirectToAction(nameof(this.GetAll));
+        }
+
+        public async Task<IActionResult> AddItemToUserCart(int itemId, int quantity)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            await this.itemsService.AddItemToUserAsync(itemId, userId, quantity);
+            return this.RedirectToAction(nameof(this.GetUserItems));
         }
     }
 }

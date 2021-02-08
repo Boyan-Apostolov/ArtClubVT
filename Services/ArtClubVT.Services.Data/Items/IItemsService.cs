@@ -26,5 +26,9 @@
         public Task EditItemAsync(int id, EditItemViewModel model);
 
         public Task DeleteItemAsync(int id);
+
+        public ICollection<T> GetUsersItems<T>(string userId);
+
+        Task AddItemToUserAsync(int itemId, string userId, int quantity = 1);
     }
 }

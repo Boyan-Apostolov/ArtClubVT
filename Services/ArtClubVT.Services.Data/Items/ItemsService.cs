@@ -20,11 +20,19 @@
     {
         private readonly IDeletableEntityRepository<Item> itemsRepository;
         private readonly IConfiguration configuration;
+        private readonly IDeletableEntityRepository<ApplicationUser> usersRepository;
+        private readonly IDeletableEntityRepository<ItemsUsers> itemsUsersRepository;
 
-        public ItemsService(IDeletableEntityRepository<Item> itemsRepository, IConfiguration configuration)
+        public ItemsService(
+            IDeletableEntityRepository<Item> itemsRepository,
+            IConfiguration configuration,
+            IDeletableEntityRepository<ApplicationUser> usersRepository,
+            IDeletableEntityRepository<ItemsUsers> itemsUsersRepository)
         {
             this.itemsRepository = itemsRepository;
             this.configuration = configuration;
+            this.usersRepository = usersRepository;
+            this.itemsUsersRepository = itemsUsersRepository;
         }
 
         public ICollection<T> GetItemsByCategory<T>(string categoryName)
@@ -127,6 +135,30 @@
             var item = await this.itemsRepository.All().FirstOrDefaultAsync(x => x.Id == id);
             this.itemsRepository.Delete(item);
             await this.itemsRepository.SaveChangesAsync();
+        }
+
+        public ICollection<T> GetUsersItems<T>(string userId)
+        {
+            var items = this.itemsUsersRepository.All()
+                .Where(x => x.ApplicationUserId == userId).ToList();
+            return this.itemsUsersRepository.All()
+                .Where(x => x.ApplicationUserId == userId)
+                .Select(x => x.Item)
+                .To<T>().ToList();
+        }
+
+        public async Task AddItemToUserAsync(int itemId, string userId, int quantity = 1)
+        {
+            var user = this.usersRepository.All()
+                .FirstOrDefault(x => x.Id == userId);
+            user.Items.Add(new ItemsUsers()
+            {
+                ApplicationUserId = userId,
+                ApplicationUser = user,
+                ItemId = itemId,
+                Quantity = quantity,
+            });
+            await this.usersRepository.SaveChangesAsync();
         }
     }
 }

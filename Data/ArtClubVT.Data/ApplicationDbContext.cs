@@ -24,8 +24,6 @@
         {
         }
 
-        public DbSet<Cart> Carts { get; set; }
-
         public DbSet<Item> Items { get; set; }
 
         public DbSet<Order> Orders { get; set; }
