@@ -1,0 +1,32 @@
+﻿@model AddOrderViewModel;
+@{
+    this.ViewData["Title"] = "Закупуване на всичко от количката";
+}
+
+<form method="post" class="col-md-6 offset-md-3"
+      enctype="multipart/form-data">
+    <h1>@this.ViewData["Title"]</h1>
+
+    <div asp-validation-summary="All" class="text-danger"></div>
+    <div class="form-group">
+        <label asp-for="BuyerName">Име и фамилия</label>
+        <input asp-for="BuyerName" class="form-control" />
+        <span asp-validation-for="BuyerName" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BuyerPhone">Телефон</label>
+        <input asp-for="BuyerPhone" class="form-control" rows="5" />
+        <span asp-validation-for="BuyerPhone" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="BuyerAddress">Адрес за доставка</label>
+        <textarea asp-for="BuyerAddress" class="form-control" rows="3"></textarea>
+        <span asp-validation-for="BuyerAddress" class="text-danger"></span>
+    </div>
+    <div class="form-group">
+        <label asp-for="Note">Коментар/забележка</label>
+        <input asp-for="Note" class="form-control" />
+        <span asp-validation-for="Note" class="text-danger"></span>
+    </div>
+    <input type="submit" class="btn btn-primary" value="ПОРЪЧАЙ" />
+</form>

@@ -27,6 +27,7 @@
         <p>Размер: @Model.Size</p>
         <p>Материал: @Model.Material</p>
         <p>Оставащи бройки: @Model.Quantity</p>
+        <p>Категория: <a asp-area="" asp-controller="Items" asp-action="GetItemsByCategoryName" asp-route-categoryName ="@Model.CategoryName">@Model.CategoryName</a></p>
     </div>
     <div class="col-md-3" style="padding-top: 50px">
         <p>Код на продукт: @Model.Id</p>
@@ -34,7 +35,7 @@
         <form method="post" asp-controller="Items" asp-action="AddItemToUserCart">
             <div  style="width: 300px;">
                 <div class="t">
-                    <input type="number" placeholder="Количество" name="quantity" id="quantity" class="form-control" style="display: inline; height: 60px;"/>
+                    <input type="number" required  placeholder="Количество" name="quantity" id="quantity" class="form-control" style="display: inline; height: 60px;"/>
                     <input type="hidden" name="itemId" id="itemId" value="@Model.Id"/>
                 </div>
                 <button type="submit" class="btn btn-info" style="margin-bottom: 4px">Добави в количката</button>

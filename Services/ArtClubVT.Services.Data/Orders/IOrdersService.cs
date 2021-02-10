@@ -10,5 +10,7 @@
     public interface IOrdersService
     {
         Task<int> CreateOrderAsync(AddOrderViewModel model);
+
+        Task BuyEverythingFromUserItems(AddOrderViewModel model);
     }
 }

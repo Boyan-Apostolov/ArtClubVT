@@ -11,6 +11,8 @@
 
         public string UserId { get; set; }
 
+        public int Quantity { get; set; }
+
         [Required]
         [MinLength(5)]
         public string BuyerName { get; set; }

@@ -23,5 +23,7 @@
         public string BuyerAddress { get; set; }
 
         public string Note { get; set; }
+
+        public int Quantity { get; set; }
     }
 }

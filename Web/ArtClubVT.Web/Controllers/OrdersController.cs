@@ -44,5 +44,22 @@
             this.ViewBag.OrderId = orderId;
             return this.View();
         }
+
+        [Authorize]
+        public IActionResult BuyEverythingFromUserItems()
+        {
+            var viewModel = new AddOrderViewModel();
+            return this.View(viewModel);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> BuyEverythingFromUserItems(AddOrderViewModel model)
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            model.UserId = userId;
+            await this.ordersService.BuyEverythingFromUserItems(model); // TODO: implement
+
+            return this.RedirectToAction("GetAll", "Items", new { area = string.Empty });
+        }
     }
 }

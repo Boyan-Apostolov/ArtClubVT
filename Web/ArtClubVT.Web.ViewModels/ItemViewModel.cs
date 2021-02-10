@@ -26,6 +26,8 @@
 
         public int Quantity { get; set; }
 
+        public string CategoryName { get; set; }
+
         public void CreateMappings(IProfileExpression configuration)
         {
             configuration.CreateMap<ItemViewModel, ItemsUsers>()

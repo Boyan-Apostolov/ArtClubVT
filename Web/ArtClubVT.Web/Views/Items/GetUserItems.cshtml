@@ -22,8 +22,10 @@
         </div>
         <hr />
     }
-    <h2 class="text-center">Обща сума: @sum</h2>
-    <a class="text-center" href="#">Продължи</a>
+    <h2 class="text-center">Обща сума: @sum лв</h2>
+    <div class="text-center">
+        <a class="btn btn-success" asp-area="" asp-controller="Orders" asp-action="BuyEverythingFromUserItems">Продължи</a>
+    </div>
 }
 else
 {

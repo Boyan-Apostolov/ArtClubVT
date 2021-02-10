@@ -143,8 +143,6 @@
                 .Include(x => x.Item)
                 .Where(x => x.ApplicationUserId == userId)
                 .ToList();
-
-            // .To<>() // TODO: user viewModel
         }
 
         public async Task AddItemToUserAsync(int itemId, string userId, int quantity = 1)
