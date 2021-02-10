@@ -12,5 +12,7 @@
         Task<int> CreateOrderAsync(AddOrderViewModel model);
 
         Task BuyEverythingFromUserItems(AddOrderViewModel model);
+
+        ICollection<T> GetUserOrders<T>(string userId);
     }
 }

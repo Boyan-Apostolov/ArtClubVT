@@ -2,12 +2,14 @@
 {
     using System;
     using System.Collections.Generic;
+    using System.Linq;
     using System.Text;
     using System.Threading.Tasks;
 
     using ArtClubVT.Data.Common.Repositories;
     using ArtClubVT.Data.Models;
     using ArtClubVT.Services.Data.Items;
+    using ArtClubVT.Services.Mapping;
     using ArtClubVT.Web.ViewModels;
 
     public class OrdersService : IOrdersService
@@ -54,6 +56,13 @@
                 await this.CreateOrderAsync(model);
                 await this.itemsService.RemoveItemFromUserItems(item.ItemId, model.UserId);
             }
+        }
+
+        public ICollection<T> GetUserOrders<T>(string userId)
+        {
+            return this.ordersRepository.All()
+                .Where(x => x.ApplicationUserId == userId)
+                .To<T>().ToList();
         }
     }
 }

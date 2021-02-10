@@ -91,6 +91,7 @@
             return this.RedirectToAction(nameof(this.InfoById), new { id });
         }
 
+        [Authorize]
         public IActionResult GetUserItems()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -108,6 +109,7 @@
             return this.RedirectToAction(nameof(this.GetAll));
         }
 
+        [Authorize]
         public async Task<IActionResult> AddItemToUserCart(int itemId, int quantity)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
@@ -115,6 +117,7 @@
             return this.RedirectToAction(nameof(this.GetUserItems));
         }
 
+        [Authorize]
         public async Task<IActionResult> RemoveItemFromUserItems(int id)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;

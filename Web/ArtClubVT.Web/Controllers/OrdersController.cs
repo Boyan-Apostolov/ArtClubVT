@@ -1,4 +1,6 @@
-﻿namespace ArtClubVT.Web.Controllers
+﻿using System.Collections.Generic;
+
+namespace ArtClubVT.Web.Controllers
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -20,7 +22,10 @@
         [Authorize]
         public IActionResult OrderItem(int id)
         {
-            var viewModel = new AddOrderViewModel() { ItemId = id };
+            var viewModel = new AddOrderViewModel()
+            {
+                ItemId = id,
+            };
             return this.View(viewModel);
         }
 
@@ -34,6 +39,8 @@
             }
 
             model.UserId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            model.Quantity = 1;
+
             var orderId = await this.ordersService.CreateOrderAsync(model);
             return this.RedirectToAction(nameof(this.SuccessfulOrder), new { orderId });
         }
@@ -57,9 +64,16 @@
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             model.UserId = userId;
-            await this.ordersService.BuyEverythingFromUserItems(model); // TODO: implement
+            await this.ordersService.BuyEverythingFromUserItems(model);
 
             return this.RedirectToAction("GetAll", "Items", new { area = string.Empty });
+        }
+
+        public IActionResult GetUserOrders()
+        {
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var viewModel = this.ordersService.GetUserOrders<OrderViewModel>(userId);
+            return this.View(viewModel);
         }
     }
 }
