@@ -7,6 +7,6 @@ namespace ArtClubVT.Services.Data.Emails
 {
     public interface IEmailsService
     {
-        Task Test();
+        Task NotifyAdminForOrder(string userEmail);
     }
 }

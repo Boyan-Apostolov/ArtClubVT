@@ -16,14 +16,14 @@ namespace ArtClubVT.Services.Data.Emails
             this.emailSender = emailSender;
         }
 
-        public async Task Test()
+        public async Task NotifyAdminForOrder(string userEmail)
         {
             await this.emailSender.SendEmailAsync(
                 GlobalConstants.SystemEmail,
-                $"Админ на ArtClubVT",
-                "boian4934@gmail.com",
-                "Test",
-                $"Test");
+                "Нова поръчка!",
+                GlobalConstants.SystemEmail,
+                "Нова поръчка!",
+                $"Здравей, шефе! Имаш нова поръчка от {userEmail}. Провери си таба: ПОРЪЧКИ");
         }
     }
 }

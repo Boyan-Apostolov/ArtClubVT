@@ -1,4 +1,6 @@
-﻿namespace ArtClubVT.Services.Data.Orders
+﻿using ArtClubVT.Services.Data.Emails;
+
+namespace ArtClubVT.Services.Data.Orders
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -14,13 +16,19 @@
     {
         private readonly IDeletableEntityRepository<Order> ordersRepository;
         private readonly IItemsService itemsService;
+        private readonly IEmailsService emailsService;
+        private readonly IRepository<ApplicationUser> usersRepository;
 
         public OrdersService(
             IDeletableEntityRepository<Order> ordersRepository,
-            IItemsService itemsService)
+            IItemsService itemsService,
+            IEmailsService emailsService,
+            IRepository<ApplicationUser> usersRepository)
         {
             this.ordersRepository = ordersRepository;
             this.itemsService = itemsService;
+            this.emailsService = emailsService;
+            this.usersRepository = usersRepository;
         }
 
         public async Task<int> CreateOrderAsync(AddOrderViewModel model)
@@ -37,7 +45,9 @@
                 Quantity = model.Quantity,
             };
 
-            // TODO: Notify admin
+            var userMail = this.usersRepository.All().FirstOrDefault(x => x.Id == model.UserId).Email;
+            await this.emailsService.NotifyAdminForOrder(userMail);
+
             item.Quantity = (item.Quantity - model.Quantity) <= 0 ? 0 : (item.Quantity - model.Quantity);
             await this.ordersRepository.AddAsync(order);
             await this.ordersRepository.SaveChangesAsync();
