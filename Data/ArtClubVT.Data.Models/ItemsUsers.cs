@@ -1,9 +1,5 @@
 ﻿namespace ArtClubVT.Data.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     using ArtClubVT.Data.Common.Models;
 
     public class ItemsUsers : BaseDeletableModel<int>

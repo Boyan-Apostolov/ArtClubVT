@@ -3,11 +3,9 @@
     using System;
     using System.Collections.Generic;
     using System.ComponentModel.DataAnnotations;
-    using System.Text;
 
     using ArtClubVT.Data.Models;
     using ArtClubVT.Services.Mapping;
-    using Microsoft.AspNetCore.Http;
 
     public class EditItemViewModel : IMapFrom<Item>
     {

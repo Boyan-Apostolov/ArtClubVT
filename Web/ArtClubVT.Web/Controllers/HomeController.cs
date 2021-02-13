@@ -1,9 +1,6 @@
 ﻿namespace ArtClubVT.Web.Controllers
 {
     using System.Diagnostics;
-    using System.Threading.Tasks;
-
-    using ArtClubVT.Services.Data.Categories;
     using ArtClubVT.Web.ViewModels;
     using Microsoft.AspNetCore.Mvc;
 

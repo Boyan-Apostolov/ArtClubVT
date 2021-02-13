@@ -20,10 +20,12 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\ArtClubVT.Common\ArtClubVT.Common.csproj" />
     <ProjectReference Include="..\..\Data\ArtClubVT.Data.Common\ArtClubVT.Data.Common.csproj" />
     <ProjectReference Include="..\..\Data\ArtClubVT.Data.Models\ArtClubVT.Data.Models.csproj" />
     <ProjectReference Include="..\..\Web\ArtClubVT.Web.ViewModels\ArtClubVT.Web.ViewModels.csproj" />
     <ProjectReference Include="..\ArtClubVT.Services.Mapping\ArtClubVT.Services.Mapping.csproj" />
+    <ProjectReference Include="..\ArtClubVT.Services.Messaging\ArtClubVT.Services.Messaging.csproj" />
   </ItemGroup>
 
 </Project>

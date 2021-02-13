@@ -1,4 +1,6 @@
-﻿namespace ArtClubVT.Web
+﻿using ArtClubVT.Services.Data.Emails;
+
+namespace ArtClubVT.Web
 {
     using System.Reflection;
 
@@ -65,11 +67,12 @@
             services.AddScoped<IDbQueryRunner, DbQueryRunner>();
 
             // Application services
-            services.AddTransient<IEmailSender, NullMessageSender>();
+            services.AddTransient<IEmailSender>(x => new SendGridEmailSender(this.configuration.GetSection("SendGrid")["API_Key"]));
             services.AddTransient<ISettingsService, SettingsService>();
             services.AddTransient<ICategoryService, CategoryService>();
             services.AddTransient<IItemsService, ItemsService>();
             services.AddTransient<IOrdersService, OrdersService>();
+            services.AddTransient<IEmailsService, EmailsService>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

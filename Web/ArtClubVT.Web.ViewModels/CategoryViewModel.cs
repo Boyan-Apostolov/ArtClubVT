@@ -1,9 +1,5 @@
 ﻿namespace ArtClubVT.Web.ViewModels
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     using ArtClubVT.Data.Models;
     using ArtClubVT.Services.Mapping;
 

@@ -1,0 +1,21 @@
+﻿@model OrderViewModel;
+@{
+    this.ViewData["Title"] = $"Инфо за поръчка Nº {Model.Id}";
+}
+<h1 class="text-center">@this.ViewData["Title"]</h1>
+@if (Model.IsCompleted)
+{
+    <div class="alert alert-success text-center" role="alert">
+        Статус: <strong>ЗАВЪРШЕНА</strong>
+    </div>
+}
+else
+{
+    <div class="alert alert-warning text-center" role="alert">
+        Статус: <strong>не приключила</strong>
+    </div>
+    <p>Продукт - @Model.ItemName</p>
+    <p>Количество - @Model.Quantity</p>
+    <p>Коментар - @Model.Note</p>
+    <p>Дата на поръчване - @Model.CreatedOn.ToShortDateString()</p>
+}

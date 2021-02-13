@@ -1,9 +1,7 @@
 ﻿namespace ArtClubVT.Services.Data.Items
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using ArtClubVT.Data.Common.Repositories;

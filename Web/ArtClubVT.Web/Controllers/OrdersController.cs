@@ -1,6 +1,4 @@
-﻿using System.Collections.Generic;
-
-namespace ArtClubVT.Web.Controllers
+﻿namespace ArtClubVT.Web.Controllers
 {
     using System.Security.Claims;
     using System.Threading.Tasks;
@@ -69,10 +67,18 @@ namespace ArtClubVT.Web.Controllers
             return this.RedirectToAction("GetAll", "Items", new { area = string.Empty });
         }
 
+        [Authorize]
         public IActionResult GetUserOrders()
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var viewModel = this.ordersService.GetUserOrders<OrderViewModel>(userId);
+            return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult GetOrderInfo(int id)
+        {
+            var viewModel = this.ordersService.GetOrderInfo<OrderViewModel>(id);
             return this.View(viewModel);
         }
     }

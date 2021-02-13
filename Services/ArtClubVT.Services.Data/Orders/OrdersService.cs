@@ -1,9 +1,7 @@
 ﻿namespace ArtClubVT.Services.Data.Orders
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using ArtClubVT.Data.Common.Repositories;
@@ -39,6 +37,7 @@
                 Quantity = model.Quantity,
             };
 
+            // TODO: Notify admin
             item.Quantity = (item.Quantity - model.Quantity) <= 0 ? 0 : (item.Quantity - model.Quantity);
             await this.ordersRepository.AddAsync(order);
             await this.ordersRepository.SaveChangesAsync();
@@ -63,6 +62,12 @@
             return this.ordersRepository.All()
                 .Where(x => x.ApplicationUserId == userId)
                 .To<T>().ToList();
+        }
+
+        public T GetOrderInfo<T>(int orderId)
+        {
+            return this.ordersRepository.All()
+                .Where(x => x.Id == orderId).To<T>().FirstOrDefault();
         }
     }
 }

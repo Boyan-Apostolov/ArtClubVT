@@ -1,15 +1,12 @@
 ﻿namespace ArtClubVT.Services.Data.Categories
 {
-    using System;
     using System.Collections.Generic;
     using System.Linq;
-    using System.Text;
     using System.Threading.Tasks;
 
     using ArtClubVT.Data.Common.Repositories;
     using ArtClubVT.Data.Models;
     using ArtClubVT.Services.Mapping;
-    using ArtClubVT.Web.ViewModels;
 
     public class CategoryService : ICategoryService
     {

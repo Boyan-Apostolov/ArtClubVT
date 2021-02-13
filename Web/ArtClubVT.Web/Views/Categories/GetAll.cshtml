@@ -6,9 +6,11 @@
 
 <div class="text-center">
     <h1 class="display-4">Всички категории в  @GlobalConstants.SystemName!</h1>
-    @foreach (var category in Model)
-    {
-        <p><a asp-area="" asp-controller="Items" asp-action="GetItemsByCategoryName" asp-route-categoryName="@category.Name">@category.Name</a></p>
-    }
-
+    <ul class="list-group">
+        @foreach (var category in Model)
+        {
+            <p></p>
+            <li class="list-group-item"><i class="fas fa-list"></i><a asp-area="" asp-controller="Items" asp-action="GetItemsByCategoryName" asp-route-categoryName="@category.Name">@category.Name</a></li>
+        }
+    </ul>
 </div>

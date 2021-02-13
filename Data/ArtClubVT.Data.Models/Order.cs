@@ -1,9 +1,5 @@
 ﻿namespace ArtClubVT.Data.Models
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Text;
-
     using ArtClubVT.Data.Common.Models;
 
     public class Order : BaseDeletableModel<int>
@@ -25,5 +21,7 @@
         public string Note { get; set; }
 
         public int Quantity { get; set; }
+
+        public bool IsCompleted { get; set; }
     }
 }

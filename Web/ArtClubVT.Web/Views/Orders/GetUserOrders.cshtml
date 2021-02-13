@@ -19,7 +19,7 @@
                 <td>@order.ItemName</td>
                 <td>@order.Quantity</td>
                 <td>@order.CreatedOn.ToShortDateString()</td>
-                <td><a class="btn btn-info">Информация</a></td> <!--//TODO:Implement to get info-->
+                <td><a asp-area="" asp-controller="Orders" asp-action="GetOrderInfo" asp-route-id="@order.Id"class="btn btn-info">Информация</a></td>
             </tr>
         }
     </table>

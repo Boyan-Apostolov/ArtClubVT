@@ -1,8 +1,5 @@
 ﻿namespace ArtClubVT.Web.Controllers
 {
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
     using System.Security.Claims;
     using System.Threading.Tasks;
 
@@ -12,7 +9,6 @@
     using ArtClubVT.Web.ViewModels;
     using Microsoft.AspNetCore.Authorization;
     using Microsoft.AspNetCore.Mvc;
-    using Microsoft.CodeAnalysis.CSharp.Syntax;
 
     public class ItemsController : Controller
     {
