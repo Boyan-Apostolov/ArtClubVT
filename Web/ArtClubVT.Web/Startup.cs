@@ -1,6 +1,4 @@
-﻿using ArtClubVT.Services.Data.Emails;
-
-namespace ArtClubVT.Web
+﻿namespace ArtClubVT.Web
 {
     using System.Reflection;
 
@@ -12,6 +10,7 @@ namespace ArtClubVT.Web
     using ArtClubVT.Data.Seeding;
     using ArtClubVT.Services.Data;
     using ArtClubVT.Services.Data.Categories;
+    using ArtClubVT.Services.Data.Emails;
     using ArtClubVT.Services.Data.Items;
     using ArtClubVT.Services.Data.Orders;
     using ArtClubVT.Services.Mapping;

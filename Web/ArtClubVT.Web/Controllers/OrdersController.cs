@@ -3,6 +3,7 @@
     using System.Security.Claims;
     using System.Threading.Tasks;
 
+    using ArtClubVT.Common;
     using ArtClubVT.Services.Data.Orders;
     using ArtClubVT.Web.ViewModels;
     using Microsoft.AspNetCore.Authorization;
@@ -80,6 +81,20 @@
         {
             var viewModel = this.ordersService.GetOrderInfo<OrderViewModel>(id);
             return this.View(viewModel);
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> ApproveOrder(int orderId)
+        {
+            await this.ordersService.ApproveOrderAsync(orderId);
+            return this.RedirectToAction("Index", "AdminOrders", new { area = "Administration" });
+        }
+
+        [Authorize(Roles = GlobalConstants.AdministratorRoleName)]
+        public async Task<IActionResult> DeclineOrder(int orderId)
+        {
+            await this.ordersService.DeclineOrderAsync(orderId);
+            return this.RedirectToAction("Index", "AdminOrders", new { area = "Administration" });
         }
     }
 }

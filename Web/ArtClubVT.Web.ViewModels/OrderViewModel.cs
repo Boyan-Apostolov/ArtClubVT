@@ -18,5 +18,9 @@
         public DateTime CreatedOn { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public bool? IsConfirmed { get; set; }
+
+        public string ApplicationUserEmail { get; set; }
     }
 }

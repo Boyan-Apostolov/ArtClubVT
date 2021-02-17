@@ -2,12 +2,12 @@
 {
     using Microsoft.EntityFrameworkCore.Migrations;
 
-    public partial class AddIsCompletedToOrders : Migration
+    public partial class AddIsConfirmedToOrders : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.AddColumn<bool>(
-                name: "IsCompleted",
+                name: "IsConfirmed",
                 table: "Orders",
                 type: "bit",
                 nullable: false,
@@ -17,7 +17,7 @@
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "IsCompleted",
+                name: "IsConfirmed",
                 table: "Orders");
         }
     }

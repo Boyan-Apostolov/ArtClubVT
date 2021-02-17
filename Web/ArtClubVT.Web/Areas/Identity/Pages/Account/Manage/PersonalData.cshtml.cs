@@ -1,12 +1,13 @@
-﻿using System.Threading.Tasks;
-using ArtClubVT.Data.Models;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using Microsoft.Extensions.Logging;
-
-namespace ArtClubVT.Web.Areas.Identity.Pages.Account.Manage
+﻿namespace ArtClubVT.Web.Areas.Identity.Pages.Account.Manage
 {
+    using System.Threading.Tasks;
+
+    using ArtClubVT.Data.Models;
+    using Microsoft.AspNetCore.Identity;
+    using Microsoft.AspNetCore.Mvc;
+    using Microsoft.AspNetCore.Mvc.RazorPages;
+    using Microsoft.Extensions.Logging;
+
     public class PersonalDataModel : PageModel
     {
         private readonly UserManager<ApplicationUser> _userManager;

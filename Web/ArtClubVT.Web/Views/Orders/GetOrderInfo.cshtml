@@ -9,13 +9,27 @@
         Статус: <strong>ЗАВЪРШЕНА</strong>
     </div>
 }
-else
+else if (Model.IsConfirmed == false)
+{
+<div class="alert alert-danger text-center" role="alert">
+    Статус: <strong>Отказана</strong>
+</div>
+
+}
+else if (Model.IsConfirmed == null)
 {
     <div class="alert alert-warning text-center" role="alert">
-        Статус: <strong>не приключила</strong>
+        Статус: <strong>Непотвърдена</strong>
     </div>
-    <p>Продукт - @Model.ItemName</p>
-    <p>Количество - @Model.Quantity</p>
-    <p>Коментар - @Model.Note</p>
-    <p>Дата на поръчване - @Model.CreatedOn.ToShortDateString()</p>
+
 }
+else if (Model.IsConfirmed == true)
+{
+    <div class="alert alert-success text-center" role="alert">
+        Статус: <strong>Потвърдена</strong>
+    </div>
+}
+<p>Продукт - @Model.ItemName</p>
+<p>Количество - @Model.Quantity</p>
+<p>Коментар - @Model.Note</p>
+<p>Дата на поръчване - @Model.CreatedOn.ToShortDateString()</p>

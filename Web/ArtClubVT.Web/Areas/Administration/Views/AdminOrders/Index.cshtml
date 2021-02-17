@@ -1,0 +1,50 @@
+﻿@using System.Net.NetworkInformation
+@model ICollection<OrderViewModel>
+@{
+    this.ViewData["Title"] = "Направени поръчки";
+}
+@if (Model.Any())
+{
+    <h1>@this.ViewData["Title"]</h1>
+    <table class="table table-striped text-center">
+        <tr>
+            <th>Продукт:</th>
+            <th>Количество:</th>
+            <th>Създадена от:</th>
+            <th>Потвърди:</th>
+            <th>Откажи:</th>
+            <th>Създадена на:</th>
+            <th>Информация:</th>
+        </tr>
+        @foreach (var order in Model)
+        {
+            <tr>
+                <td>@order.ItemName</td>
+                <td>@order.Quantity</td>
+                <td>@order.ApplicationUserEmail</td>
+                @if (order.IsConfirmed == null)
+                {
+                    <td><a asp-area="" asp-controller="Orders" asp-action="ApproveOrder" asp-route-orderId="@order.Id" class="btn btn-success"><i class="fas fa-check-square"></i></a></td>
+                    <td><a asp-area="" asp-controller="Orders" asp-action="DeclineOrder" asp-route-orderId="@order.Id" class="btn btn-danger"><i class="fas fa-trash-alt"></i></a></td>
+                }
+                else if (order.IsConfirmed == false)
+                {
+                    <td><i class="fas fa-times btn-outline-danger fa-lg"></i></td>
+                    <td><i class="fas fa-times btn-outline-danger fa-lg"></i></td>
+                }
+                else if (order.IsConfirmed == true)
+                {
+                    <td><i class="fas fa-check btn-outline-success fa-lg"></i></td>
+                    <td><i class="fas fa-check btn-outline-success fa-lg"></i></td>
+                }
+
+                <td>@order.CreatedOn.ToShortDateString()</td>
+                <td><a asp-area="" asp-controller="Orders" asp-action="GetOrderInfo" asp-route-id="@order.Id" class="btn btn-info">Информация</a></td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h1>Нямате направени поръчки</h1>
+}

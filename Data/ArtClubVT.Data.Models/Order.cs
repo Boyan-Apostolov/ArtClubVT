@@ -23,5 +23,7 @@
         public int Quantity { get; set; }
 
         public bool IsCompleted { get; set; }
+
+        public bool? IsConfirmed { get; set; }
     }
 }

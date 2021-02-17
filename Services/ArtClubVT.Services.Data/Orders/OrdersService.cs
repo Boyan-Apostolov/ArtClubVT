@@ -1,6 +1,4 @@
-﻿using ArtClubVT.Services.Data.Emails;
-
-namespace ArtClubVT.Services.Data.Orders
+﻿namespace ArtClubVT.Services.Data.Orders
 {
     using System.Collections.Generic;
     using System.Linq;
@@ -8,9 +6,11 @@ namespace ArtClubVT.Services.Data.Orders
 
     using ArtClubVT.Data.Common.Repositories;
     using ArtClubVT.Data.Models;
+    using ArtClubVT.Services.Data.Emails;
     using ArtClubVT.Services.Data.Items;
     using ArtClubVT.Services.Mapping;
     using ArtClubVT.Web.ViewModels;
+    using Microsoft.EntityFrameworkCore;
 
     public class OrdersService : IOrdersService
     {
@@ -43,6 +43,7 @@ namespace ArtClubVT.Services.Data.Orders
                 BuyerPhone = model.BuyerPhone,
                 Note = model.Note == null ? model.Note : "няма",
                 Quantity = model.Quantity,
+                IsConfirmed = null,
             };
 
             var userMail = this.usersRepository.All().FirstOrDefault(x => x.Id == model.UserId).Email;
@@ -74,10 +75,39 @@ namespace ArtClubVT.Services.Data.Orders
                 .To<T>().ToList();
         }
 
+        public ICollection<T> GetAllOrders<T>()
+        {
+            return this.ordersRepository.All()
+                .Include(x => x.ApplicationUser)
+                .To<T>().ToList();
+        }
+
         public T GetOrderInfo<T>(int orderId)
         {
             return this.ordersRepository.All()
                 .Where(x => x.Id == orderId).To<T>().FirstOrDefault();
+        }
+
+        public async Task ApproveOrderAsync(int orderId)
+        {
+            var order = this.ordersRepository.All()
+                .Include(x => x.ApplicationUser)
+                .FirstOrDefault(x => x.Id == orderId);
+            order.IsConfirmed = true;
+
+            await this.emailsService.ApproveOrderEmail(order.ApplicationUser.Email);
+            await this.ordersRepository.SaveChangesAsync();
+        }
+
+        public async Task DeclineOrderAsync(int orderId)
+        {
+            var order = this.ordersRepository.All()
+                .Include(x => x.ApplicationUser)
+                .FirstOrDefault(x => x.Id == orderId);
+            order.IsConfirmed = false;
+
+            await this.emailsService.DeclineOrderEmail(order.ApplicationUser.Email);
+            await this.ordersRepository.SaveChangesAsync();
         }
     }
 }

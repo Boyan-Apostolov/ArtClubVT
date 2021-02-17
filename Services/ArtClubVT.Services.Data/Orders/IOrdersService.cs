@@ -13,6 +13,12 @@
 
         ICollection<T> GetUserOrders<T>(string userId);
 
+        ICollection<T> GetAllOrders<T>();
+
         T GetOrderInfo<T>(int orderId);
+
+        Task ApproveOrderAsync(int orderId);
+
+        Task DeclineOrderAsync(int orderId);
     }
 }
