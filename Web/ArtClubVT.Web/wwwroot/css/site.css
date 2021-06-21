@@ -11211,7 +11211,7 @@ section#contact {
 }
 
 .reset-margin {
-    margin: 0;
+    margin: 0 !important;
 }
 
 .cart-items {

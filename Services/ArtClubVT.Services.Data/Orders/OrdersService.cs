@@ -41,7 +41,7 @@
                 BuyerName = model.BuyerName,
                 BuyerAddress = model.BuyerAddress,
                 BuyerPhone = model.BuyerPhone,
-                Note = model.Note == null ? model.Note : "няма",
+                Note = model.Note != null ? model.Note : "няма",
                 Quantity = model.Quantity,
                 IsConfirmed = null,
             };
