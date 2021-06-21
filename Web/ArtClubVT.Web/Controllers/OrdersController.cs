@@ -65,7 +65,7 @@
             model.UserId = userId;
             await this.ordersService.BuyEverythingFromUserItems(model);
 
-            return this.RedirectToAction("GetAll", "Items", new { area = string.Empty });
+            return this.RedirectToAction("SuccessfullyOrderCart", "Orders", new { area = string.Empty });
         }
 
         [Authorize]
@@ -74,6 +74,12 @@
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier).Value;
             var viewModel = this.ordersService.GetUserOrders<OrderViewModel>(userId);
             return this.View(viewModel);
+        }
+
+        [Authorize]
+        public IActionResult SuccessfullyOrderCart()
+        {
+            return this.View();
         }
 
         [Authorize]
