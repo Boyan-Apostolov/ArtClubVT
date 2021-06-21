@@ -2,7 +2,7 @@
 @{
     this.ViewData["Title"] = $"Инфо за поръчка Nº {Model.Id}";
 }
-<h1 class="text-center">@this.ViewData["Title"]</h1>
+<h1 class="text-center text-white">@this.ViewData["Title"]</h1>
 @if (Model.IsCompleted)
 {
     <div class="alert alert-success text-center" role="alert">
@@ -29,7 +29,8 @@ else if (Model.IsConfirmed == true)
         Статус: <strong>Потвърдена</strong>
     </div>
 }
-<p>Продукт - @Model.ItemName</p>
-<p>Количество - @Model.Quantity</p>
-<p>Коментар - @Model.Note</p>
-<p>Дата на поръчване - @Model.CreatedOn.ToShortDateString()</p>
+<img class="img-fluid img-thumbnail custom-shadow" src="@Model.ItemImageLink""/>
+<p class="text-white">Продукт - @Model.ItemName</p>
+<p class="text-white">Количество - @Model.Quantity</p>
+<p class="text-white">Коментар - @Model.Note</p>
+<p class="text-white">Дата на поръчване - @Model.CreatedOn.ToShortDateString()</p>

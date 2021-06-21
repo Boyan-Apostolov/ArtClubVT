@@ -1,12 +1,12 @@
 ﻿@using System.Net.NetworkInformation
 @model ICollection<OrderViewModel>
 @{
-    this.ViewData["Title"] = "Направени поръчки";
+    this.ViewData["Title"] = "Направени поръчки:";
 }
 @if (Model.Any())
 {
-    <h1>@this.ViewData["Title"]</h1>
-    <table class="table table-striped text-center">
+    <h1 class="text-white">@this.ViewData["Title"]</h1>
+    <table class="table table-striped text-center text-white custom-shadow">
         <tr>
             <th>Продукт:</th>
             <th>Количество:</th>

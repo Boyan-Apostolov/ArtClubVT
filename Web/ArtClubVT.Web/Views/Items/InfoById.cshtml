@@ -17,28 +17,28 @@
                 width: 100%;
             }
 </style>
-<div class="row">
+<div class="row single-item-info">
     <div class="col-md-4" style="display: inline">
-        <a href="@Model.ImageLink"><img class="img-fluid img-thumbnail" src="@Model.ImageLink" /></a>
+        <a href="@Model.ImageLink"><img class="img-fluid img-thumbnail custom-shadow" src="@Model.ImageLink" /></a>
     </div>
     <div class="col-md-4" style="display: inline-block">
-        <h1>Продукт: @Model.Name</h1>
-        <p>Описание: @Model.Description</p>
-        <p>Размер: @Model.Size</p>
-        <p>Материал: @Model.Material</p>
-        <p>Оставащи бройки: @Model.Quantity</p>
-        <p>Категория: <a asp-area="" asp-controller="Items" asp-action="GetItemsByCategoryName" asp-route-categoryName="@Model.CategoryName">@Model.CategoryName</a></p>
+        <h1 class="text-white">Продукт: @Model.Name</h1>
+        <p class="text-white">Описание: @Model.Description</p>
+        <p class="text-white">Размер: @Model.Size</p>
+        <p class="text-white">Материал: @Model.Material</p>
+        <p class="text-white">Оставащи бройки: @Model.Quantity</p>
+        <p class="text-white">Категория: <a  class="text-warning" asp-area="" asp-controller="Items" asp-action="GetItemsByCategoryName" asp-route-categoryName="@Model.CategoryName">@Model.CategoryName</a></p>
     </div>
     <div class="col-md-3" style="padding-top: 50px">
-        <p>Код на продукт: @Model.Id</p>
-        <p>Цена: @Model.Price</p>
+        <p class="text-white">Код на продукт: @Model.Id</p>
+        <p class="text-white">Цена: @Model.Price лв.</p>
         <form method="post" asp-controller="Items" asp-action="AddItemToUserCart">
             <div style="width: 300px;">
                 <div class="t">
                     <input type="number" required placeholder="Количество" name="quantity" id="quantity" class="form-control" style="display: inline; height: 60px;"/>
                     <input type="hidden" name="itemId" id="itemId" value="@Model.Id" />
                 </div>
-                <button type="submit" class="btn btn-info" style="margin-bottom: 4px">Добави в количката</button>
+                <button class="btn btn-info" style="margin-bottom: 4px">Добави в количката</button>
             </div>
         </form>
         <a class="btn btn-success" id="orderItem" style="display: block; margin-top: 10px;" asp-area="" asp-controller="Orders" asp-action="OrderItem" asp-route-id="@Model.Id">ПОРЪЧАЙ 1 БРОЙ</a>
@@ -68,3 +68,4 @@
         </div>
     </div>
 </div>
+

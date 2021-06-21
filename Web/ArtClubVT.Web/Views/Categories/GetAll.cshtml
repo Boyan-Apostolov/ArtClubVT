@@ -5,12 +5,11 @@
 }
 
 <div class="text-center">
-    <h1 class="display-4">Всички категории в  @GlobalConstants.SystemName!</h1>
-    <ul class="list-group">
+    <h1 class="display-4 text-white">Всички категории в  @GlobalConstants.SystemName!</h1>
+    <ul class="list-group categories-list">
         @foreach (var category in Model)
         {
-            <p></p>
-            <li class="list-group-item"><i class="fas fa-list"></i><a asp-area="" asp-controller="Items" asp-action="GetItemsByCategoryName" asp-route-categoryName="@category.Name">@category.Name</a></li>
+            <li class="list-group-item curvy-edges"><i class="fas fa-list"></i><a asp-area="" asp-controller="Items" asp-action="GetItemsByCategoryName" asp-route-categoryName="@category.Name">@category.Name</a></li>
         }
     </ul>
 </div>

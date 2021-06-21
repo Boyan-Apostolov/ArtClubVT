@@ -5,24 +5,22 @@
 }
 @if (Model.Any())
 {
-    <h1 class="text-center">@this.ViewData["Title"]</h1>
+    <h1 class="text-center text-white">@this.ViewData["Title"]</h1>
     @foreach (var itemUser in @Model)
     {
-        <div class="media">
+        <div class="media cart-items">
+            @{ sum += (itemUser.Item.Price * itemUser.Quantity); }
+
             <img class="mr-3 img-fluid" src="@itemUser.Item.ImageLink" style="width: 200px; height: auto" alt="@itemUser.Item.Name">
             <div class="media-body" style="padding-top: 50px">
-                <h5 class="mt-0">@itemUser.Item.Name</h5>
-                Цена: @itemUser.Item.Price лв.
-                @{ sum += (itemUser.Item.Price * itemUser.Quantity); }
-                <br />
-                Количество: @itemUser.Quantity бр.
-                <br />
+                <h5 class="mt-0 text-white">@itemUser.Item.Name</h5>
+                <p class="text-white reset-margin">Цена: @itemUser.Item.Price лв.</p>
+                <p class="text-white reset-margin">Количество: @itemUser.Quantity бр.</p>
                 <a class="btn btn-danger" asp-area="" asp-controller="Items" asp-action="RemoveItemFromUserItems" asp-route-id="@itemUser.ItemId" style="margin-top: 10px">Премахни от количката <i class="fas fa-trash-alt" style="display: inline-block"></i></a>
             </div>
         </div>
-        <hr />
     }
-    <h2 class="text-center">Обща сума: @sum лв</h2>
+    <h2 class="text-center text-white">Обща сума: @sum.ToString("0.##") лв</h2>
     <div class="text-center">
         <a class="btn btn-success" asp-area="" asp-controller="Orders" asp-action="BuyEverythingFromUserItems">Продължи</a>
     </div>

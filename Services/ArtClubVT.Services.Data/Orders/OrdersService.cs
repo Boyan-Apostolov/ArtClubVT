@@ -71,6 +71,7 @@
         public ICollection<T> GetUserOrders<T>(string userId)
         {
             return this.ordersRepository.All()
+                .Include(x => x.Item)
                 .Where(x => x.ApplicationUserId == userId)
                 .To<T>().ToList();
         }

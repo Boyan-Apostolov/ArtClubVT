@@ -1,48 +1,48 @@
 ﻿@model EditItemViewModel
 @{
-    this.ViewData["Title"] = "Добавяне на нов продукт";
+    this.ViewData["Title"] = $"Редактиране на продукт: '{Model.Name}' с код: '{Model.Id}'";
     var categories = this.Model.Categories.Select(x => new SelectListItem(x.Value, x.Key));
 }
 
-<form method="post" class="col-md-6 offset-md-3"
+<form method="post" class="col-md-6 offset-md-3 text-center"
       enctype="multipart/form-data">
-    <h1>@this.ViewData["Title"]</h1>
-    <div asp-validation-summary="All" class="text-danger"></div>
+    <h1 class="text-white">@this.ViewData["Title"]</h1>
+    @*<div asp-validation-summary="All" class="text-danger bg-white"></div>*@
     <div class="form-group">
-        <label asp-for="Name">Име</label>
+        <label class="text-white" asp-for="Name">Име</label>
         <input asp-for="Name" class="form-control" />
-        <span asp-validation-for="Name" class="text-danger"></span>
+        <span asp-validation-for="Name" class="text-danger bg-white"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Description">Описание</label>
+        <label class="text-white" asp-for="Description">Описание</label>
         <textarea asp-for="Description" class="form-control" rows="5"></textarea>
-        <span asp-validation-for="Description" class="text-danger"></span>
+        <span asp-validation-for="Description" class="text-danger bg-white"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Size">Размер</label>
+        <label class="text-white" asp-for="Size">Размер</label>
         <input asp-for="Size" class="form-control" />
-        <span asp-validation-for="Size" class="text-danger"></span>
+        <span asp-validation-for="Size" class="text-danger bg-white"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Material">Материал</label>
+        <label class="text-white" asp-for="Material">Материал</label>
         <input asp-for="Material" class="form-control" />
-        <span asp-validation-for="Material" class="text-danger"></span>
+        <span asp-validation-for="Material" class="text-danger bg-white"></span>
     </div>
     <div class="form-group">
-        <label asp-for="CategoryId">Категория</label>
+        <label class="text-white" asp-for="CategoryId">Категория</label>
         <select asp-for="CategoryId" class="form-control" asp-items="categories"></select>
-        <span asp-validation-for="CategoryId" class="text-danger"></span>
+        <span asp-validation-for="CategoryId" class="text-danger bg-white"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Price">Цена</label>
-        <input asp-for="Price" class="form-control" />
-        <span asp-validation-for="Price" class="text-danger"></span>
+        <label class="text-white" asp-for="Price">Цена</label>
+        <input asp-for="Price" type="number" class="form-control" />
+        <span asp-validation-for="Price" class="text-danger bg-white"></span>
     </div>
     <div class="form-group">
-        <label asp-for="Quantity">Количество</label>
-        <input asp-for="Quantity" class="form-control" />
-        <span asp-validation-for="Quantity" class="text-danger"></span>
+        <label class="text-white" asp-for="Quantity">Количество</label>
+        <input asp-for="Quantity" type="number" class="form-control" />
+        <span asp-validation-for="Quantity" class="text-danger bg-white"></span>
     </div>
     <input type="hidden" asp-for="Id"/>
-    <input type="submit" class="btn btn-primary" value="Запази" />
+    <input type="submit" class="btn btn-success" value="Запази" />
 </form>

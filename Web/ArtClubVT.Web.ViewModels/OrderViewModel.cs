@@ -22,5 +22,7 @@
         public bool? IsConfirmed { get; set; }
 
         public string ApplicationUserEmail { get; set; }
+
+        public string ItemImageLink { get; set; }
     }
 }
