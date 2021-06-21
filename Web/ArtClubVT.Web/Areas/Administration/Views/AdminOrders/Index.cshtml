@@ -20,8 +20,10 @@
         {
             <tr>
                 <td>@order.ItemName</td>
-                <td>@order.Quantity</td>
-                <td>@order.ApplicationUserEmail</td>
+                <td>@order.Quantity бр.</td>
+                <td><i class="fas fa-envelope"></i> @order.ApplicationUserEmail
+                    <a asp-area="Administration" asp-controller="AdminOrders" asp-action="GetUserOrder" asp-route-id="@order.Id" class="btn btn-success">КЛИЕНТ</a></td>
+
                 @if (order.IsConfirmed == null)
                 {
                     <td><a asp-area="" asp-controller="Orders" asp-action="ApproveOrder" asp-route-orderId="@order.Id" class="btn btn-success"><i class="fas fa-check-square"></i></a></td>
@@ -38,7 +40,7 @@
                     <td><i class="fas fa-check btn-outline-success fa-lg"></i></td>
                 }
 
-                <td>@order.CreatedOn.ToShortDateString()</td>
+                <td><i class="fas fa-calendar-day"></i> @order.CreatedOn.ToShortDateString()</td>
                 <td><a asp-area="" asp-controller="Orders" asp-action="GetOrderInfo" asp-route-id="@order.Id" class="btn btn-info">Информация</a></td>
             </tr>
         }

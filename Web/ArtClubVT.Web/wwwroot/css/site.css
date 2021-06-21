@@ -11225,3 +11225,14 @@ section#contact {
     align-items: center;
     flex-wrap: nowrap !important;
 }
+.buyer-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+.buyer-info-list {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}

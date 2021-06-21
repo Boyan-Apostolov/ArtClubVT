@@ -20,5 +20,7 @@
         Task ApproveOrderAsync(int orderId);
 
         Task DeclineOrderAsync(int orderId);
+
+        T GetOrderAdministration<T>(int orderId);
     }
 }

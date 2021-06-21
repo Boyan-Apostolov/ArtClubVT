@@ -110,5 +110,16 @@
             await this.emailsService.DeclineOrderEmail(order.ApplicationUser.Email);
             await this.ordersRepository.SaveChangesAsync();
         }
+
+        public T GetOrderAdministration<T>(int orderId)
+        {
+            var order = this.ordersRepository.All()
+                .Include(x => x.ApplicationUser)
+                .Include(x => x.Item)
+                .Where(x => x.Id == orderId)
+                .To<T>().FirstOrDefault();
+
+            return order;
+        }
     }
 }

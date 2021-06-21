@@ -23,5 +23,11 @@
             var viewModel = this.ordersService.GetAllOrders<OrderViewModel>();
             return this.View(viewModel);
         }
+
+        public IActionResult GetUserOrder(int id)
+        {
+            var viewModel = this.ordersService.GetOrderAdministration<AdminOrderViewModel>(id);
+            return this.View(viewModel);
+        }
     }
 }

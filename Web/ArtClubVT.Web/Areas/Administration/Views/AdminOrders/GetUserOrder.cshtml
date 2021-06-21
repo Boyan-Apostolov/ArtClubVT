@@ -1,0 +1,45 @@
+﻿@model AdminOrderViewModel;
+@{
+    this.ViewData["Title"] = $"Инфо за поръчка Nº {Model.Id}";
+}
+<h1 class="text-center text-white">@this.ViewData["Title"]</h1>
+@if (Model.IsCompleted)
+{
+    <div class="alert alert-success text-center" role="alert">
+        Статус: <strong>ЗАВЪРШЕНА</strong>
+    </div>
+}
+else if (Model.IsConfirmed == false)
+{
+    <div class="alert alert-danger text-center" role="alert">
+        Статус: <strong>Отказана</strong>
+    </div>
+
+}
+else if (Model.IsConfirmed == null)
+{
+    <div class="alert alert-warning text-center" role="alert">
+        Статус: <strong>Непотвърдена</strong>
+    </div>
+
+}
+else if (Model.IsConfirmed == true)
+{
+    <div class="alert alert-success text-center" role="alert">
+        Статус: <strong>Потвърдена</strong>
+    </div>
+}
+
+
+<div class="text-center text-white buyer-info">
+    <img class="img-fluid img-thumbnail custom-shadow col-md-5" src="@Model.ItemImageLink" />
+    <ul class="buyer-info-list">
+        <p>Продукт - @Model.Item.Name</p>
+        <p>Количество - @Model.Quantity бр</p>
+        <p>Коментар - @Model.Note</p>
+        <p>Име на клиент - @Model.BuyerName</p>
+        <p>Телефон на клиент - @Model.BuyerPhone</p>
+        <p>Адрес за доставка - @Model.BuyerAddress</p>
+        <p>Дата на поръчване - @Model.CreatedOn.ToShortDateString()</p>
+    </ul>
+</div>
