@@ -11236,3 +11236,19 @@ section#contact {
     flex-direction: column;
     align-items: flex-start;
 }
+.width-60 {
+    width: 60%;
+}
+.flex {
+    display: flex;
+}
+.margin-right {
+    margin-right: 50px;
+}
+.center {
+    justify-content: center;
+    text-align: center;
+    align-self: center;
+    width: 100%;
+    margin: 0 auto;
+}
